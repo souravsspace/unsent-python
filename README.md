@@ -34,7 +34,7 @@ client = unsent("us_12345")
 You can also set your API key using environment variables:
 
 ```python
-# Set UNSENT_API_KEY or UNSEND_API_KEY in your environment
+# Set UNSENT_API_KEY or UNSENT_API_KEY in your environment
 # Then initialize without passing the key
 client = unsent()
 ```
