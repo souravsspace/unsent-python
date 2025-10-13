@@ -1,4 +1,4 @@
-"""TypedDict models for the unsent API.
+"""TypedDict models for the Unsent API.
 
 Lightweight, Pydantic-free types for editor autocomplete and static checks.
 At runtime these are plain dicts and lists.
@@ -15,14 +15,14 @@ from typing_extensions import NotRequired, Required, Literal
 # ---------------------------------------------------------------------------
 
 DomainStatus = Literal[
-    'NOT_STARTED',
-    'PENDING',
-    'SUCCESS',
-    'FAILED',
-    'TEMPORARY_FAILURE',
+    "NOT_STARTED",
+    "PENDING",
+    "SUCCESS",
+    "FAILED",
+    "TEMPORARY_FAILURE",
 ]
 
-DNSRecordType = Literal['MX', 'TXT']
+DNSRecordType = Literal["MX", "TXT"]
 
 
 class DNSRecord(TypedDict, total=False):
@@ -94,24 +94,30 @@ class DomainVerifyResponse(TypedDict):
     message: str
 
 
+class DomainDeleteResponse(TypedDict):
+    id: int
+    success: bool
+    message: str
+
+
 # ---------------------------------------------------------------------------
 # Emails
 # ---------------------------------------------------------------------------
 
 EmailEventStatus = Literal[
-    'SCHEDULED',
-    'QUEUED',
-    'SENT',
-    'DELIVERY_DELAYED',
-    'BOUNCED',
-    'REJECTED',
-    'RENDERING_FAILURE',
-    'DELIVERED',
-    'OPENED',
-    'CLICKED',
-    'COMPLAINED',
-    'FAILED',
-    'CANCELLED',
+    "SCHEDULED",
+    "QUEUED",
+    "SENT",
+    "DELIVERY_DELAYED",
+    "BOUNCED",
+    "REJECTED",
+    "RENDERING_FAILURE",
+    "DELIVERED",
+    "OPENED",
+    "CLICKED",
+    "COMPLAINED",
+    "FAILED",
+    "CANCELLED",
 ]
 
 
@@ -123,22 +129,22 @@ class EmailEvent(TypedDict, total=False):
 
 
 Email = TypedDict(
-    'Email',
+    "Email",
     {
-        'id': str,
-        'teamId': float,
-        'to': Union[str, List[str]],
-        'replyTo': NotRequired[Union[str, List[str]]],
-        'cc': NotRequired[Union[str, List[str]]],
-        'bcc': NotRequired[Union[str, List[str]]],
-        'from': str,
-        'subject': str,
-        'html': str,
-        'text': str,
-        'createdAt': str,
-        'updatedAt': str,
-        'emailEvents': List[EmailEvent],
-    }
+        "id": str,
+        "teamId": float,
+        "to": Union[str, List[str]],
+        "replyTo": NotRequired[Union[str, List[str]]],
+        "cc": NotRequired[Union[str, List[str]]],
+        "bcc": NotRequired[Union[str, List[str]]],
+        "from": str,
+        "subject": str,
+        "html": str,
+        "text": str,
+        "createdAt": str,
+        "updatedAt": str,
+        "emailEvents": List[EmailEvent],
+    },
 )
 
 
@@ -152,40 +158,40 @@ class EmailUpdateResponse(TypedDict, total=False):
 
 
 EmailLatestStatus = Literal[
-    'SCHEDULED',
-    'QUEUED',
-    'SENT',
-    'DELIVERY_DELAYED',
-    'BOUNCED',
-    'REJECTED',
-    'RENDERING_FAILURE',
-    'DELIVERED',
-    'OPENED',
-    'CLICKED',
-    'COMPLAINED',
-    'FAILED',
-    'CANCELLED',
+    "SCHEDULED",
+    "QUEUED",
+    "SENT",
+    "DELIVERY_DELAYED",
+    "BOUNCED",
+    "REJECTED",
+    "RENDERING_FAILURE",
+    "DELIVERED",
+    "OPENED",
+    "CLICKED",
+    "COMPLAINED",
+    "FAILED",
+    "CANCELLED",
 ]
 
 
 EmailListItem = TypedDict(
-    'EmailListItem',
+    "EmailListItem",
     {
-        'id': str,
-        'to': Union[str, List[str]],
-        'replyTo': NotRequired[Union[str, List[str]]],
-        'cc': NotRequired[Union[str, List[str]]],
-        'bcc': NotRequired[Union[str, List[str]]],
-        'from': str,
-        'subject': str,
-        'html': str,
-        'text': str,
-        'createdAt': str,
-        'updatedAt': str,
-        'latestStatus': EmailLatestStatus,
-        'scheduledAt': str,
-        'domainId': float,
-    }
+        "id": str,
+        "to": Union[str, List[str]],
+        "replyTo": NotRequired[Union[str, List[str]]],
+        "cc": NotRequired[Union[str, List[str]]],
+        "bcc": NotRequired[Union[str, List[str]]],
+        "from": str,
+        "subject": str,
+        "html": str,
+        "text": str,
+        "createdAt": str,
+        "updatedAt": str,
+        "latestStatus": EmailLatestStatus,
+        "scheduledAt": str,
+        "domainId": float,
+    },
 )
 
 
@@ -200,23 +206,23 @@ class Attachment(TypedDict):
 
 
 EmailCreate = TypedDict(
-    'EmailCreate',
+    "EmailCreate",
     {
-        'to': Required[Union[str, List[str]]],
-        'from': Required[str],
-        'subject': NotRequired[str],
-        'templateId': NotRequired[str],
-        'variables': NotRequired[Dict[str, str]],
-        'replyTo': NotRequired[Union[str, List[str]]],
-        'cc': NotRequired[Union[str, List[str]]],
-        'bcc': NotRequired[Union[str, List[str]]],
-        'text': NotRequired[str],
-        'html': NotRequired[str],
-        'attachments': NotRequired[List[Attachment]],
-        'scheduledAt': NotRequired[Union[datetime, str]],
-        'inReplyToId': NotRequired[str],
-        'headers': NotRequired[Dict[str, str]],
-    }
+        "to": Required[Union[str, List[str]]],
+        "from": Required[str],
+        "subject": NotRequired[str],
+        "templateId": NotRequired[str],
+        "variables": NotRequired[Dict[str, str]],
+        "replyTo": NotRequired[Union[str, List[str]]],
+        "cc": NotRequired[Union[str, List[str]]],
+        "bcc": NotRequired[Union[str, List[str]]],
+        "text": NotRequired[str],
+        "html": NotRequired[str],
+        "attachments": NotRequired[List[Attachment]],
+        "scheduledAt": NotRequired[Union[datetime, str]],
+        "inReplyToId": NotRequired[str],
+        "headers": NotRequired[Dict[str, str]],
+    },
 )
 
 
@@ -225,23 +231,23 @@ class EmailCreateResponse(TypedDict, total=False):
 
 
 EmailBatchItem = TypedDict(
-    'EmailBatchItem',
+    "EmailBatchItem",
     {
-        'to': Required[Union[str, List[str]]],
-        'from': Required[str],
-        'subject': NotRequired[str],
-        'templateId': NotRequired[str],
-        'variables': NotRequired[Dict[str, str]],
-        'replyTo': NotRequired[Union[str, List[str]]],
-        'cc': NotRequired[Union[str, List[str]]],
-        'bcc': NotRequired[Union[str, List[str]]],
-        'text': NotRequired[str],
-        'html': NotRequired[str],
-        'attachments': NotRequired[List[Attachment]],
-        'scheduledAt': NotRequired[Union[datetime, str]],
-        'inReplyToId': NotRequired[str],
-        'headers': NotRequired[Dict[str, str]],
-    }
+        "to": Required[Union[str, List[str]]],
+        "from": Required[str],
+        "subject": NotRequired[str],
+        "templateId": NotRequired[str],
+        "variables": NotRequired[Dict[str, str]],
+        "replyTo": NotRequired[Union[str, List[str]]],
+        "cc": NotRequired[Union[str, List[str]]],
+        "bcc": NotRequired[Union[str, List[str]]],
+        "text": NotRequired[str],
+        "html": NotRequired[str],
+        "attachments": NotRequired[List[Attachment]],
+        "scheduledAt": NotRequired[Union[datetime, str]],
+        "inReplyToId": NotRequired[str],
+        "headers": NotRequired[Dict[str, str]],
+    },
 )
 
 
@@ -263,6 +269,7 @@ class EmailCancelResponse(TypedDict, total=False):
 # ---------------------------------------------------------------------------
 # Contacts
 # ---------------------------------------------------------------------------
+
 
 class ContactCreate(TypedDict, total=False):
     email: str
@@ -334,7 +341,7 @@ class ContactDeleteResponse(TypedDict):
 # Common
 # ---------------------------------------------------------------------------
 
+
 class APIError(TypedDict):
     code: str
     message: str
-
