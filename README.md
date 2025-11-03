@@ -204,6 +204,82 @@ data, error = client.contacts.delete(
 )
 ```
 
+### Managing Campaigns
+
+#### Create Campaign
+
+```python
+from unsent import types
+
+campaign_payload: types.CampaignCreate = {
+    "name": "Welcome Series",
+    "subject": "Welcome to our service!",
+    "html": "<p>Thanks for joining us!</p>",
+    "from": "welcome@example.com",
+    "contactBookId": "cb_1234567890",
+}
+
+campaign_resp, error = client.campaigns.create(payload=campaign_payload)
+
+if error:
+    print(f"Error: {error}")
+else:
+    print(f"Campaign created! ID: {campaign_resp['id']}")
+```
+
+#### Schedule Campaign
+
+```python
+from unsent import types
+
+schedule_payload: types.CampaignSchedule = {
+    "scheduledAt": "2024-12-01T10:00:00Z",
+}
+
+schedule_resp, error = client.campaigns.schedule(
+    campaign_id=campaign_resp["id"],
+    payload=schedule_payload
+)
+
+if error:
+    print(f"Error: {error}")
+else:
+    print("Campaign scheduled successfully!")
+```
+
+#### Pause/Resume Campaigns
+
+```python
+# Pause a campaign
+pause_resp, error = client.campaigns.pause(campaign_id="campaign_123")
+
+if error:
+    print(f"Error: {error}")
+else:
+    print("Campaign paused successfully!")
+
+# Resume a campaign
+resume_resp, error = client.campaigns.resume(campaign_id="campaign_123")
+
+if error:
+    print(f"Error: {error}")
+else:
+    print("Campaign resumed successfully!")
+```
+
+#### Get Campaign Details
+
+```python
+data, error = client.campaigns.get("campaign_id")
+
+if error:
+    print(f"Error: {error}")
+else:
+    print(f"Campaign status: {data['status']}")
+    print(f"Recipients: {data['total']}")
+    print(f"Sent: {data['sent']}")
+```
+
 ### Managing Domains
 
 #### List Domains
@@ -317,6 +393,14 @@ client = unsent("us_12345", session=session)
 - `client.contacts.update(book_id, contact_id, payload)` - Update a contact
 - `client.contacts.upsert(book_id, contact_id, payload)` - Upsert a contact
 - `client.contacts.delete(book_id, contact_id)` - Delete a contact
+
+### Campaign Methods
+
+- `client.campaigns.create(payload)` - Create a campaign
+- `client.campaigns.get(campaign_id)` - Get campaign details
+- `client.campaigns.schedule(campaign_id, payload)` - Schedule a campaign
+- `client.campaigns.pause(campaign_id)` - Pause a campaign
+- `client.campaigns.resume(campaign_id)` - Resume a campaign
 
 ### Domain Methods
 

@@ -2,6 +2,7 @@
 
 from .unsent import unsent, unsentHTTPError
 from .domains import Domains  # type: ignore
+from .campaigns import Campaigns  # type: ignore
 from . import types
 
-__all__ = ["unsent", "unsentHTTPError", "types", "Domains"]
+__all__ = ["unsent", "unsentHTTPError", "types", "Domains", "Campaigns"]

@@ -4,6 +4,7 @@ Enhancements:
 - Optional ``raise_on_error`` to raise ``unsentHTTPError`` on non-2xx.
 - Reusable ``requests.Session`` support for connection reuse.
 """
+
 from __future__ import annotations
 
 import os
@@ -18,7 +19,9 @@ DEFAULT_BASE_URL = "https://app.unsent.dev"
 class unsentHTTPError(Exception):
     """HTTP error raised when ``raise_on_error=True`` and a request fails."""
 
-    def __init__(self, status_code: int, error: Dict[str, Any], method: str, path: str) -> None:
+    def __init__(
+        self, status_code: int, error: Dict[str, Any], method: str, path: str
+    ) -> None:
         self.status_code = status_code
         self.error = error
         self.method = method
@@ -55,7 +58,11 @@ class unsent:
         if not self.key:
             raise ValueError("Missing API key. Pass it to unsent('us_123')")
 
-        base = os.getenv("UNSENT_BASE_URL") or os.getenv("UNSENT_BASE_URL") or DEFAULT_BASE_URL
+        base = (
+            os.getenv("UNSENT_BASE_URL")
+            or os.getenv("UNSENT_BASE_URL")
+            or DEFAULT_BASE_URL
+        )
         if url:
             base = url
         self.url = f"{base}/api/v1"
@@ -103,16 +110,24 @@ class unsent:
     # ------------------------------------------------------------------
     # HTTP verb helpers
     # ------------------------------------------------------------------
-    def post(self, path: str, body: Any) -> Tuple[Optional[Dict[str, Any]], Optional[Dict[str, Any]]]:
+    def post(
+        self, path: str, body: Any
+    ) -> Tuple[Optional[Dict[str, Any]], Optional[Dict[str, Any]]]:
         return self._request("POST", path, json=body)
 
-    def get(self, path: str) -> Tuple[Optional[Dict[str, Any]], Optional[Dict[str, Any]]]:
+    def get(
+        self, path: str
+    ) -> Tuple[Optional[Dict[str, Any]], Optional[Dict[str, Any]]]:
         return self._request("GET", path)
 
-    def put(self, path: str, body: Any) -> Tuple[Optional[Dict[str, Any]], Optional[Dict[str, Any]]]:
+    def put(
+        self, path: str, body: Any
+    ) -> Tuple[Optional[Dict[str, Any]], Optional[Dict[str, Any]]]:
         return self._request("PUT", path, json=body)
 
-    def patch(self, path: str, body: Any) -> Tuple[Optional[Dict[str, Any]], Optional[Dict[str, Any]]]:
+    def patch(
+        self, path: str, body: Any
+    ) -> Tuple[Optional[Dict[str, Any]], Optional[Dict[str, Any]]]:
         return self._request("PATCH", path, json=body)
 
     def delete(
@@ -125,3 +140,4 @@ class unsent:
 from .emails import Emails  # noqa: E402  pylint: disable=wrong-import-position
 from .contacts import Contacts  # noqa: E402  pylint: disable=wrong-import-position
 from .domains import Domains  # type: ignore  # noqa: E402
+from .campaigns import Campaigns  # type: ignore  # noqa: E402
