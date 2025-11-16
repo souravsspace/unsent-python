@@ -13,7 +13,7 @@ from typing import Any, Dict, Optional, Tuple
 import requests
 
 
-DEFAULT_BASE_URL = "https://app.unsent.dev"
+DEFAULT_BASE_URL = "https://api.unsent.dev"
 
 
 class unsentHTTPError(Exception):
@@ -41,7 +41,7 @@ class unsent:
     ----------
     key:
         API key issued by unsent. If not provided, the client attempts to
-        read ``unsent_API_KEY`` or ``UNSENT_API_KEY`` from the environment.
+        read ``UNSENT_API_KEY`` or ``UNSENT_API_KEY`` from the environment.
     url:
         Optional base URL for the API (useful for testing).
     """
@@ -54,7 +54,7 @@ class unsent:
         raise_on_error: bool = True,
         session: Optional[requests.Session] = None,
     ) -> None:
-        self.key = key or os.getenv("unsent_API_KEY") or os.getenv("UNSENT_API_KEY")
+        self.key = key or os.getenv("UNSENT_API_KEY") or os.getenv("UNSENT_API_KEY")
         if not self.key:
             raise ValueError("Missing API key. Pass it to unsent('us_123')")
 
@@ -65,7 +65,7 @@ class unsent:
         )
         if url:
             base = url
-        self.url = f"{base}/api/v1"
+        self.url = f"{base}/v1"
 
         self.headers = {
             "Authorization": f"Bearer {self.key}",
