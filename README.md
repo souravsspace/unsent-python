@@ -418,3 +418,9 @@ client = unsent("us_12345", session=session)
 ## License
 
 MIT
+
+## Support
+
+- [Documentation](https://docs.unsent.dev)
+- [GitHub Issues](https://github.com/souravsspace/unsent-python/issues)
+- [Discord Community](https://discord.gg/unsent)
