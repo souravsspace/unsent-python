@@ -118,6 +118,31 @@ else:
     print(f"Sent {len(data['emails'])} emails")
 ```
 
+#### Idempotent Retries
+
+```python
+# Idempotent retries: same payload + same key returns the original response
+payload = {
+    "to": "hello@acme.com",
+    "from": "hello@company.com",
+    "subject": "Welcome!",
+    "html": "<p>Welcome to our service</p>",
+}
+
+resp, _ = client.emails.send(
+    payload=payload,
+    options={"idempotency_key": "signup-123"},
+)
+
+# Works for batch requests as well
+resp, _ = client.emails.batch(
+    payload=[payload],
+    options={"idempotency_key": "bulk-welcome-1"},
+)
+
+# If the same key is reused with a different payload, the API responds with HTTP 409.
+```
+
 ### Managing Emails
 
 #### Get Email Details
